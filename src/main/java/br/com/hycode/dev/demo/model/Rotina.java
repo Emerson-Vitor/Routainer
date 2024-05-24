@@ -23,7 +23,7 @@ public class Rotina {
     private String name;
     private String description;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private List<String> commands;
 
     private LocalTime timetask;

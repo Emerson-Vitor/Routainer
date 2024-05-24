@@ -2,6 +2,8 @@ package br.com.hycode.dev.demo.controller;
 
 import br.com.hycode.dev.demo.model.Rotina;
 import br.com.hycode.dev.demo.service.RotinaService;
+import br.com.hycode.dev.demo.utils.RotinaLinux;
+import br.com.hycode.dev.demo.utils.RotinaWindows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -122,9 +124,24 @@ public class RotinaControllerGeral {
         LocalTime now = LocalTime.now();
         System.out.println("local time is " + now);
         for(Map<String, Object> rotinaAtiva : this.listMapTaskActive){
+            LocalTime timeTask = (LocalTime) rotinaAtiva.get("timetask");
             System.out.println("id "+rotinaAtiva.get("id")+" time task is "+ rotinaAtiva.get("timetask"));
-            if(rotinaAtiva.get("timetask") == now){
-                //logica
+            if (now.getHour() == timeTask.getHour() && now.getMinute() == timeTask.getMinute()) {
+                System.out.println("funcionou");
+                Optional<Rotina> rotinaOptional = service.getRotina((Long) rotinaAtiva.get("id"));
+                if(rotinaOptional.isPresent()){
+                    if(rotinaOptional.get().getOperationalSystem().equals("windows")){
+                        RotinaWindows rotinaWindows = new RotinaWindows();
+                        String resultado = rotinaWindows.executarRotina(rotinaOptional.get());
+                        System.out.println("executado rotina "+rotinaOptional.get().getName()+" as "+ now +" os resultados foram \n" + resultado);
+
+                    }
+                    if(rotinaOptional.get().getOperationalSystem().equals("linux")){
+                        RotinaLinux rotinaLinux = new RotinaLinux();
+                        String resultado = rotinaLinux.executarRotina(rotinaOptional.get());
+                        System.out.println("executado rotina "+rotinaOptional.get().getName()+" as "+ now +" os resultados foram \n" + resultado);
+                    }
+                }
             }
         }
     }
