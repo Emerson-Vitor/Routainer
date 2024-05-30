@@ -4,6 +4,7 @@ import br.com.hycode.dev.demo.model.Rotina;
 import br.com.hycode.dev.demo.service.RotinaService;
 import br.com.hycode.dev.demo.utils.RotinaLinux;
 import br.com.hycode.dev.demo.utils.RotinaWindows;
+import jakarta.persistence.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -20,8 +21,8 @@ import java.util.*;
 public class RotinaControllerGeral {
 
 
-    private final int STO = 60000;
-
+    private final int STO_MIN = 60000;
+    private final int STO_DAY = 86400000;
     private final RotinaService service;
 
     private List<Map<String, Object>> listMapTaskActive;
@@ -33,17 +34,20 @@ public class RotinaControllerGeral {
 
     }
 
-
+    @Scheduled(fixedDelay = STO_DAY )
     @GetMapping("/sync")
     public ResponseEntity<String> sync() {
         List<Rotina> rotinaList = listarRotinasAtivas().getStatusCode() == HttpStatus.OK ? listarRotinasAtivas().getBody(): null;
         if(rotinaList != null){
             List<Map<String, Object>> auxiliar = new ArrayList<>();
             for(Rotina rotina : rotinaList){
+                if(rotina.getId() != 404){
                 Map<String, Object> rotinaMap = new HashMap<>();
                 rotinaMap.put("timetask", rotina.getTimetask());
                 rotinaMap.put("id", rotina.getId());
                 auxiliar.add(rotinaMap);
+
+                }
             }
             listMapTaskActive = auxiliar;
             syncDateTime = LocalDateTime.now();
@@ -55,7 +59,7 @@ public class RotinaControllerGeral {
 
 
 
-    @GetMapping("/update/{id}")
+    @PostMapping("/update/{id}")
     public ResponseEntity<String> updateRotina(@PathVariable Long id, @RequestBody Rotina rotina){
         return service.updateRotina(id, rotina);
     }
@@ -116,9 +120,9 @@ public class RotinaControllerGeral {
         return syncDateTime;
     }
 
-    @Scheduled(fixedDelay = STO )
+    @Scheduled(fixedDelay = STO_MIN )
     public void sysRotina() {
-        if(listMapTaskActive.isEmpty()){
+        if(listMapTaskActive == null) {
             return;
         }
         LocalTime now = LocalTime.now();
@@ -145,6 +149,35 @@ public class RotinaControllerGeral {
             }
         }
     }
+
+
+    @PostMapping("/Singlecommand")
+    public ResponseEntity<String> comandoUnico(Map<String, String> commands) {
+        String operationalSystem = commands.get("operationalsystem");
+        List<String> comandos = Collections.singletonList(commands.get("commands"));
+
+        Rotina rotina = new Rotina();
+        rotina.setName("unitaria");
+        rotina.setCommands(comandos);
+        rotina.setDescription("rotina unitaria");
+        rotina.setOperationalSystem(operationalSystem);
+
+
+        if (operationalSystem.equals("windows")) {
+            RotinaWindows rotinaWindows = new RotinaWindows();
+            String resultado = rotinaWindows.executarRotina(rotina);
+            return ResponseEntity.ok(resultado);
+        }
+        if (operationalSystem.equals("linux")) {
+            RotinaLinux rotinaLinux = new RotinaLinux();
+            String resultado = rotinaLinux.executarRotina(rotina);
+            return ResponseEntity.ok(resultado);
+        }
+        return ResponseEntity.badRequest().body("invalid operational system");
+    }
+
+
+
 
 
 
