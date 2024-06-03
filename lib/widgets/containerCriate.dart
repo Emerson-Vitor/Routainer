@@ -1,3 +1,4 @@
+import 'package:autoscript/widgets/buttonArrow.dart';
 import 'package:autoscript/widgets/button_status.dart';
 import 'package:autoscript/widgets/textTitle2_widget.dart';
 import 'package:autoscript/widgets/textTitle_widget.dart';
@@ -77,23 +78,48 @@ class CriateContainerWidget extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text_title2_widget(name: 'Titulo', cor: Color(0xFFFFC600)),
+                      Stack(children: [
+                        Container(
+                          padding: EdgeInsets.only(left: 25),
+                            height: 22,
+                            width: 100,
+                            child: CustomButton(
+                                text: '12',
+                                color: Color(0xFFFFC600),
+                                onPressed: () {})),
+                        Container(
+                            height: 22,
+                            width: 50,
+                            child: CustomButton(
+                                text: 'ID',
+                                color: Colors.red,
+                                onPressed: () {})),
+                      ]),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      Text_title2_widget(
+                          name: 'Titulo', cor: Color(0xFFFFC600)),
                       Textfield_widget(controller: _titleController),
                       SizedBox(height: 8),
                       Text_title2_widget(
                           name: 'Sistema Operacinal', cor: Color(0xFFFFC600)),
                       Textfield_widget(controller: _sOController),
                       SizedBox(height: 8),
-                      Text_title2_widget(name: 'Timetask', cor: Color(0xFFFFC600)),
+                      Text_title2_widget(
+                          name: 'Timetask', cor: Color(0xFFFFC600)),
                       Textfield_widget(controller: _timeTaskController),
                       SizedBox(height: 8),
-                      Text_title2_widget(name: 'Status', cor: Color(0xFFFFC600)),
+                      Text_title2_widget(
+                          name: 'Status', cor: Color(0xFFFFC600)),
                       Textfield_widget(controller: _statusController),
                       SizedBox(height: 8),
-                      Text_title2_widget(name: 'Descrição', cor: Color(0xFFFFC600)),
+                      Text_title2_widget(
+                          name: 'Descrição', cor: Color(0xFFFFC600)),
                       Textfield_widget(controller: _descriptionController),
                       SizedBox(height: 8),
-                      Text_title2_widget(name: 'Comando', cor: Color(0xFFFFC600)),
+                      Text_title2_widget(
+                          name: 'Comando', cor: Color(0xFFFFC600)),
                       Textfield_widget(controller: _commandController),
                     ],
                   ),

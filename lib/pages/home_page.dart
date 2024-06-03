@@ -1,5 +1,6 @@
 import 'package:autoscript/models/script_model.dart';
 import 'package:autoscript/widgets/cardScript.dart';
+import 'package:autoscript/widgets/containerComandoUnico.dart';
 import 'package:autoscript/widgets/containerCriate.dart';
 import 'package:autoscript/widgets/containerMenu.dart';
 import 'package:autoscript/widgets/filter.dart';
@@ -33,6 +34,7 @@ class _MyWidgetState extends State<Home_page> {
            height: MediaQuery.of(context).size.height / 100 * 90,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
                 width: MediaQuery.of(context).size.width / 100 * 70,
@@ -52,7 +54,7 @@ class _MyWidgetState extends State<Home_page> {
                   ],
                 ),
               ),
-             CriateContainerWidget(),
+             comandoUnico_widget()
             ],
           ),
         ),

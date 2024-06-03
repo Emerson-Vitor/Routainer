@@ -16,13 +16,14 @@ class CustomButton extends StatelessWidget {
     return GestureDetector(
       onTap: onPressed,
       child: CustomPaint(
-        size: Size(200, 50),
+        size: Size(100, 20),
         painter: RoundedRectangleWithTrianglePainter(color: color),
-        child: Center(
+        child: Padding(
+          padding: const EdgeInsets.only(left:9.0),
           child: Text(
             text,
             style: TextStyle(
-              color: Colors.white,
+              color: Theme.of(context).primaryColor,
               fontSize: 16,
               fontWeight: FontWeight.bold,
             ),
@@ -44,7 +45,7 @@ class RoundedRectangleWithTrianglePainter extends CustomPainter {
       ..color = color
       ..style = PaintingStyle.fill;
 
-    final radius = 10.0; // Raio para bordas arredondadas
+    final radius = 8.0; // Raio para bordas arredondadas
 
     final path = Path()
       ..moveTo(radius, 0) // Começa no topo esquerdo com borda arredondada

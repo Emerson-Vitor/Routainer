@@ -34,8 +34,11 @@ class FilterWidget extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Row(
-              children: [Text_title1_widget(name: 'Filtros')],
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [Text_title1_widget(name: 'Filtros')],
+              ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),

@@ -1,4 +1,5 @@
 import 'package:autoscript/widgets/button.dart';
+import 'package:autoscript/widgets/buttonArrow.dart';
 import 'package:autoscript/widgets/textTitle2_widget.dart';
 import 'package:autoscript/widgets/textTitle_widget.dart';
 import 'package:autoscript/widgets/textfield_widget.dart';
@@ -67,11 +68,8 @@ class _Login_pageState extends State<Login_page> {
                   Textfield_widget(
                     controller: _passwordController,
                   ),
-                  CustomTextButton(
-                    label: 'Entrar',
-                    focusNode: FocusNode(),
-                    nextFocusNode: FocusNode(),
-                  ),
+                  CustomButton(
+                      text: 'Entrar', color: Colors.green, onPressed: () {})
                 ],
               ),
             )),

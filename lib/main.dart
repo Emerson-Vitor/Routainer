@@ -13,14 +13,18 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Auto-script',
       theme: ThemeData(
+        
+        textTheme: TextTheme(bodyLarge: TextStyle(fontFamily: 'RobotoMono') ),
         useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(seedColor: Color(0xFF1A2834),
-        brightness: Brightness.dark,
-        background:  Color(0xFF1A2834),
-
-      ),),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Color(0xFF1A2834),
+          brightness: Brightness.dark,
+          background: Color(0xFF1A2834),
+        ),
+      ),
       home: Home_page(),
     );
   }
