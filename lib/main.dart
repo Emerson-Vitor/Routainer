@@ -1,5 +1,4 @@
-import 'package:autoscript/pages/home_page.dart';
-import 'package:autoscript/pages/login_page.dart';
+import 'package:autoscript/modulos/home/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
