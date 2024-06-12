@@ -4,7 +4,7 @@ import 'package:autoscript/modulos/home/widgets/containerMenu.dart';
 import 'package:flutter/material.dart';
 
 class Box_Controller {
-  Widget controllContainer(int valor)  {
+  Widget controllContainer({required int valor}) {
     switch (valor) {
       case 1:
         return menu_widget();

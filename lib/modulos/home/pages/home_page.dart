@@ -13,8 +13,9 @@ class Home_page extends StatefulWidget {
 }
 
 final ScrollController _scrollController = ScrollController();
-Box_Controller? box;
-int valor = 1;
+Box_Controller box = Box_Controller();
+late Widget caixaDeAcao;
+late int valor;
 Script scriptteste = Script(
     id: '1',
     name: 'teste',
@@ -26,11 +27,16 @@ Script scriptteste = Script(
 
 class _MyWidgetState extends State<Home_page> {
   @override
+  void initState() {
+    super.initState();
+    valor = 1;  // Initialize the class field here
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: SizedBox(
-          //  width: MediaQuery.of(context).size.width / 100 * 90,
           height: MediaQuery.of(context).size.height / 100 * 90,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,7 +60,9 @@ class _MyWidgetState extends State<Home_page> {
                   ],
                 ),
               ),
-              SizedBox(child: box!.controllContainer(valor))
+              SizedBox(
+                child: caixaDeAcao = box.controllContainer(valor: valor),
+              )
             ],
           ),
         ),
