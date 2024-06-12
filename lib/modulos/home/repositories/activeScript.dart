@@ -1,7 +1,6 @@
 import 'package:autoscript/core/exeptions/NotFoundException.dart';
 import 'package:autoscript/core/exeptions/ServerError.dart';
 import 'package:autoscript/core/http/baseUrl_config.dart';
-
 import 'package:autoscript/core/http/dio_post.dart';
 import 'package:autoscript/core/models/script_model.dart';
 

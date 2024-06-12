@@ -16,6 +16,9 @@ class CreateScriptReposirory implements ICreateScriptReposirory {
 
   @override
   Future<String> createScript(Script script) async {
+    if(Script == null){
+            throw Exception('Arquivo vazio');
+    }
     final response =
         await dio.post(url: '${BaseUrl()}/rotinas/criar', script: script);
 

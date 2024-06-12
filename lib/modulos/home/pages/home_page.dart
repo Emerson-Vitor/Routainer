@@ -1,4 +1,5 @@
 import 'package:autoscript/core/models/script_model.dart';
+import 'package:autoscript/modulos/home/controllers/box_controller.dart';
 import 'package:autoscript/modulos/home/widgets/containerComandoUnico.dart';
 import 'package:autoscript/modulos/home/widgets/filter.dart';
 import 'package:autoscript/modulos/home/widgets/scrollBar.dart';
@@ -12,6 +13,8 @@ class Home_page extends StatefulWidget {
 }
 
 final ScrollController _scrollController = ScrollController();
+Box_Controller? box;
+int valor = 1;
 Script scriptteste = Script(
     id: '1',
     name: 'teste',
@@ -27,8 +30,8 @@ class _MyWidgetState extends State<Home_page> {
     return Scaffold(
       body: Center(
         child: SizedBox(
-        //  width: MediaQuery.of(context).size.width / 100 * 90,
-           height: MediaQuery.of(context).size.height / 100 * 90,
+          //  width: MediaQuery.of(context).size.width / 100 * 90,
+          height: MediaQuery.of(context).size.height / 100 * 90,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -36,7 +39,7 @@ class _MyWidgetState extends State<Home_page> {
               SizedBox(
                 width: MediaQuery.of(context).size.width / 100 * 70,
                 child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     FilterWidget(),
                     SizedBox(
@@ -51,7 +54,7 @@ class _MyWidgetState extends State<Home_page> {
                   ],
                 ),
               ),
-             comandoUnico_widget()
+              SizedBox(child: box!.controllContainer(valor))
             ],
           ),
         ),

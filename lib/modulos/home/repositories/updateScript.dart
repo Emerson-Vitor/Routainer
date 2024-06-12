@@ -6,7 +6,7 @@ import 'package:autoscript/core/http/dio_post.dart';
 import 'package:autoscript/core/models/script_model.dart';
 
 abstract class IUpdateScriptReposirory {
-  Future<String> postUpdateScript(Script script);
+  Future<String> postUpdateScript(Script? script);
 }
 
 class UpdateScriptReposirory implements IUpdateScriptReposirory {
@@ -15,7 +15,10 @@ class UpdateScriptReposirory implements IUpdateScriptReposirory {
   UpdateScriptReposirory({required this.dio});
 
   @override
-  Future<String> postUpdateScript(Script script) async {
+  Future<String> postUpdateScript(Script? script) async {
+    if (script == null){
+      return throw Exception('Arquivo vazio');;
+    }
     final response = await dio.post(
         url: '${BaseUrl()}/rotinas/update/${script.id}', script: script);
 
